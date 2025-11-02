@@ -1,0 +1,17 @@
+{
+  "name": "dankastur-topup",
+  "version": "1.0.0",
+  "description": "Bot WhatsApp & Discord to Handle Topup Digiflazz DankaStur",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npx tsc",
+    "start": "npm run build && node ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "danka-topup"
+  },
+  "author": "Danka",
+  "license": "ISC"
+}
