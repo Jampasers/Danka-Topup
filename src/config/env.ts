@@ -8,7 +8,16 @@ function must(name: string): string {
 }
 
 export const env: IEnvConfig = {
-  phoneNumber: process.env.phoneNumber!,
+  whatsapp: {
+    phoneNumber: process.env.phoneNumber!,
+    useQRCode: Boolean(process.env.useQRCode),
+  },
+  discord: {
+    botToken: must("botToken"),
+    profileBot: must("profileBot"),
+    serverId: must("serverId"),
+    ownerId: must("ownerId"),
+  },
   digiflazz: {
     apiKey: process.env.digiflazzApiKey!,
     apiKeyDev: process.env.digiflazzApiKeyDev!,

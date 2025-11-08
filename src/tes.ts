@@ -9,7 +9,7 @@ import type { IProductResponse } from "./interfaces/product.js";
     env.digiflazz.apiKeyDev,
     env.digiflazz.username
   );
-  const balData: IProductResponse = await balClass.run("ML44");
+  const balData: IProductResponse = await balClass.run();
   console.dir(balData.data[0], {
     depth: null,
   });
