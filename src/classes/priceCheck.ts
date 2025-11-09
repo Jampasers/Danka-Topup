@@ -18,8 +18,8 @@ class priceCheck {
   ): Promise<IProductResponse> {
     const payload: Record<string, any> = {
       cmd: "prepaid",
-      username: env.digiflazz.username,
-      sign: md5(env.digiflazz.username + this.apiKey + "pricelist"),
+      username: this.username,
+      sign: md5(this.username + this.apiKey + "pricelist"),
     };
 
     if (params) {

@@ -14,8 +14,8 @@ class balCheck {
   async run(): Promise<IBalCheck> {
     const data = await axios.post(env.digiflazz.baseURL + "/cek-saldo", {
       cmd: "deposit",
-      username: env.digiflazz.username,
-      sign: md5(env.digiflazz.username + this.apiKey + "depo"),
+      username: this.username,
+      sign: md5(this.username + this.apiKey + "depo"),
     });
     const result: IBalCheck = data.data;
     return result;

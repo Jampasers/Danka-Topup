@@ -33,7 +33,7 @@ export default {
       if (productCode) {
         const [rows] = await db.query<RowDataPacket[]>(
           `
-          SELECT price, product_code FROM admins WHERE product_code = ? LIMIT 1
+          SELECT price, product_code, product_brand, product_name FROM admins WHERE product_code = ? LIMIT 1
       `,
           [productCode]
         )!;
@@ -49,7 +49,7 @@ export default {
           });
         const [rows] = await db.query<RowDataPacket[]>(
           `
-SELECT price, product_code 
+SELECT price, product_code, product_brand, product_name
 FROM admins 
 LIMIT ?`,
           [limit]
@@ -72,7 +72,10 @@ LIMIT ?`,
           result += `Code: ${asw.product_code}
 Name: ${asw.product_name}
 Game: ${asw.product_brand}
-Price: ${asw.price}
+Price: ${Number(asw.price).toLocaleString("id-ID", {
+            style: "currency",
+            currency: "IDR",
+          })}
 ========================
 `;
         }
@@ -87,7 +90,10 @@ Price: ${asw.price}
               `Code: ${data?.product_code}
 Name: ${data?.product_name}
 Game: ${data?.product_brand}
-Price: ${data?.price}`
+Price: ${Number(data?.price).toLocaleString("id-ID", {
+                style: "currency",
+                currency: "IDR",
+              })}`
             ),
           ],
         });

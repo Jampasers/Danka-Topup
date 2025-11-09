@@ -1,4 +1,4 @@
-type TransactionStatus = "Pending" | "Sukses" | "Pending";
+type TransactionStatus = "Pending" | "Sukses" | "Gagal";
 
 export interface TransactionData {
   ref_id: string;

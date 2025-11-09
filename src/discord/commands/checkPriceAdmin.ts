@@ -80,9 +80,21 @@ export default {
         response = await digiflazz.run(); // tanpa filter
       }
 
-      // console.dir(response, {
-      //   depth: null,
-      // });
+      console.dir(response, {
+        depth: null,
+      });
+
+      if (!response.data)
+        return interaction.editReply({
+          embeds: [
+            new createEmbed().run(
+              interaction,
+              `${
+                productBrand ? "Game" : productCode ? "Code" : "Goblok"
+              } ora ada`
+            ),
+          ],
+        });
 
       // 🔹 Update database MySQL sesuai aturan (cek 30 menit lalu)
       await new CheckPrice(30).upsert(response);
@@ -100,23 +112,23 @@ export default {
 
       if (productCode) {
         const [rows] = await db.query<(IPrice & RowDataPacket)[]>(
-          "SELECT id, buyer_sku_code, price, updated_at, product_name FROM prices WHERE buyer_sku_code = ? LIMIT 1",
+          "SELECT * FROM prices WHERE buyer_sku_code = ? LIMIT 1",
           [productCode]
         );
 
         data = rows.length ? rows[0] : undefined;
       } else if (productBrand) {
         const [rows] = await db.query<(IPrice & RowDataPacket)[]>(
-          "SELECT id, buyer_sku_code, price, updated_at, product_name FROM prices WHERE brand = ? LIMIT 1",
+          "SELECT * FROM prices WHERE brand = ?",
           [productBrand]
         );
 
         data = rows;
       }
 
-      console.dir(data, {
-        depth: null,
-      });
+      // console.dir(data, {
+      //   depth: null,
+      // });
 
       if (Array.isArray(data)) {
         let result = "";
@@ -124,7 +136,10 @@ export default {
           result += `Code: ${asw.buyer_sku_code}
 Name: ${asw.product_name}
 Game: ${asw.brand}
-Price: ${asw.price}
+Price: ${Number(asw.price).toLocaleString("id-ID", {
+            style: "currency",
+            currency: "IDR",
+          })}
 ========================
 `;
         }
