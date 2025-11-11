@@ -112,14 +112,14 @@ export default {
 
       if (productCode) {
         const [rows] = await db.query<(IPrice & RowDataPacket)[]>(
-          "SELECT * FROM prices WHERE buyer_sku_code = ? LIMIT 1",
+          "SELECT * FROM prices WHERE buyer_sku_code = ? ORDER BY price ASC LIMIT 1",
           [productCode]
         );
 
         data = rows.length ? rows[0] : undefined;
       } else if (productBrand) {
         const [rows] = await db.query<(IPrice & RowDataPacket)[]>(
-          "SELECT * FROM prices WHERE brand = ?",
+          "SELECT * FROM prices WHERE brand = ? ORDER BY price ASC",
           [productBrand]
         );
 

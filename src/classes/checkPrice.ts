@@ -13,7 +13,7 @@ export class CheckPrice {
     buyer_sku_code: string
   ): Promise<PriceRow | null | undefined> {
     const [rows] = await db.query<(PriceRow & RowDataPacket)[]>(
-      "SELECT id, buyer_sku_code, price, updated_at, product_name FROM prices WHERE buyer_sku_code = ? LIMIT 1",
+      "SELECT id, buyer_sku_code, price, updated_at, product_name FROM prices WHERE buyer_sku_code = ? ORDER BY price ASC LIMIT 1",
       [buyer_sku_code]
     );
     return rows.length ? rows[0] : null;

@@ -26,7 +26,7 @@ export default {
           embeds: [
             new createEmbed().run(
               interaction,
-              `Subcommand container "${commandName}" tidak ditemukan.`
+              `Subcommand "${commandName}" ora ketemu`
             ),
           ],
         });
@@ -38,7 +38,7 @@ export default {
           embeds: [
             new createEmbed().run(
               interaction,
-              `Subcommand "${sub}" tidak ditemukan pada "/${commandName}".`
+              `Subcommand "${sub}" ora ada di "/${commandName}".`
             ),
           ],
         });
@@ -51,7 +51,7 @@ export default {
           embeds: [
             new createEmbed().run(
               interaction,
-              `Command "${commandName}" tidak ditemukan.`
+              `Command "${commandName}" ora ada`
             ),
           ],
         });
